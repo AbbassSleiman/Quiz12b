@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Graphs the simulated data in 00-simulate_data.R to showcase all obersvations.
+# Purpose: Graphs the simulated data in 00-simulate_data.R to showcase all observations.
 # Author: Abbass Sleiman
 # Date: 3 April 2024
 # Contact: Abbass.sleiman@mail.utoronto.ca
