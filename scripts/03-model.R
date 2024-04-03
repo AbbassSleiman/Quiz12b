@@ -1,37 +1,31 @@
 #### Preamble ####
-# Purpose: Models... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Creates a logistic model to see how the predictor variables in the simulated
+# data interplay with the likelihood of voting for Biden.
+# Author: Abbass Sleiman
+# Date: 3 April 2024
+# Contact: Abbass.sleiman@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: 00-simulate_data.R should be run in order to have access to the
+# simulated data.
 
 
 #### Workspace setup ####
 library(tidyverse)
 library(rstanarm)
 
-#### Read data ####
-analysis_data <- read_csv("data/analysis_data/analysis_data.csv")
-
 ### Model data ####
-first_model <-
-  stan_glm(
-    formula = flying_time ~ length + width,
-    data = analysis_data,
-    family = gaussian(),
-    prior = normal(location = 0, scale = 2.5, autoscale = TRUE),
-    prior_intercept = normal(location = 0, scale = 2.5, autoscale = TRUE),
-    prior_aux = exponential(rate = 1, autoscale = TRUE),
-    seed = 853
-  )
+logit_model <- stan_glm(support ~ age_group + gender + income_group + education_level,
+                  data = data, 
+                  family = binomial(link = "logit"))
 
+# Summarize the model
+summary(logit_model)
 
 #### Save model ####
 saveRDS(
-  first_model,
-  file = "models/first_model.rds"
+  logit_model,
+  file = "models/logit_model.rds"
 )
+
 
 
